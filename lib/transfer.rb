@@ -12,11 +12,11 @@ class Transfer
 
   def valid?
     # Checks to see if both account are 'open', have money && have enough funds && the transaction is not complete
-    (@sender.valid? && @receiver.valid?) && @sender.balance >= amount && @status != "complete"
+    @sender.valid? && @receiver.valid? && @sender.balance >= amount && @status != "complete"
   end
 
   def execute_transaction
-    if self.valid?
+    if valid?
       @sender.balance -= @amount
       @receiver.balance += @amount
       @status = "complete"
